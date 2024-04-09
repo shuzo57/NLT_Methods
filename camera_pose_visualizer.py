@@ -19,7 +19,7 @@ class CameraPoseVisualizer:
         self.yrange = [1e10, -1e10]
         self.zrange = [1e10, -1e10]
     
-    def add_camera(self, extrinsic, focal_len_scaled=5, aspect_ratio=0.3, color="blue"):
+    def add_camera(self, extrinsic, focal_len_scaled=5, aspect_ratio=0.3, facecolors="blue", edgecolors='red'):
         vertex_std = np.array([
             [0, 0, 0, 1],
             [focal_len_scaled * aspect_ratio, -focal_len_scaled * aspect_ratio, focal_len_scaled, 1],
@@ -35,7 +35,7 @@ class CameraPoseVisualizer:
             [vertex_transformed[0, :-1], vertex_transformed[4, :-1], vertex_transformed[1, :-1]],
             [vertex_transformed[1, :-1], vertex_transformed[2, :-1], vertex_transformed[3, :-1], vertex_transformed[4, :-1]]
         ]
-        self.ax.add_collection3d(Poly3DCollection(meshes, facecolors=color, linewidths=1, edgecolors='r', alpha=.25))
+        self.ax.add_collection3d(Poly3DCollection(meshes, facecolors=facecolors, linewidths=1, edgecolors=edgecolors, alpha=.25))
 
         # update range
         xmin, xmax = np.min(vertex_transformed[:, 0]), np.max(vertex_transformed[:, 0])

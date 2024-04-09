@@ -44,3 +44,4 @@ if __name__ == "__main__":
             save_path = os.path.join(save_dir, f"camera_pose_{i}_{j}.png")
             visualizer.save(save_path)
             print(f"\rSaved: {save_path}", end="")
+    print("\nDone.")
