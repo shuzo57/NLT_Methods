@@ -33,7 +33,7 @@ if __name__ == "__main__":
     elev_list = [0, 45, 90, 135, 180, 225, 270, 315]
     azim_list = [0, 45, 90, 135, 180, 225, 270, 315]
 
-    save_dir = "./data/img"
+    save_dir = "./data/camera_pose"
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir, exist_ok=True)

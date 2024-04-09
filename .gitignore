@@ -160,4 +160,5 @@ cython_debug/
 #.idea/
 
 # MyDevelopEnvironment
-data/img/*
+data/camera_pose/*
+data/chessboard_3d/*
