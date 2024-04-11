@@ -9,7 +9,12 @@ from jsonenc import ExtendedEncoder
 def intrinsics_calibration(
     image_dir: str,
     pattern_size: Tuple[int, int] = (10, 7),
+    result_dir: str = None,
     ) -> Dict[str, Union[float, int]]:
+    
+    if result_dir is not None and not os.path.exists(result_dir):
+        os.makedirs(result_dir, exist_ok=True)
+
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
     objp = np.zeros((pattern_size[0] * pattern_size[1], 3), np.float32)
@@ -44,6 +49,11 @@ def intrinsics_calibration(
         corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
         imgpoints.append(corners)
 
+        if result_dir is not None:
+            cv2.drawChessboardCorners(img, pattern_size, corners, ret)
+            save_path = os.path.join(result_dir, f'calib_{file}.jpg')
+            cv2.imwrite(save_path, img)
+
         calibrated_cnt += 1
     
     print(f'\nCalibrated {calibrated_cnt} images')
@@ -70,7 +80,7 @@ if __name__ == '__main__':
     import json
 
     image_dir = "img"
-    calibration_data = intrinsics_calibration(image_dir)
+    calibration_data = intrinsics_calibration(image_dir, result_dir='data/calib_result')
     save_path = os.path.join(os.getcwd(), FileName.calibration_data)
 
     with open(save_path, 'w') as f:

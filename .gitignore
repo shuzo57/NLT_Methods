@@ -162,3 +162,4 @@ cython_debug/
 # MyDevelopEnvironment
 data/camera_pose/*
 data/chessboard_3d/*
+data/calib_result/*
