@@ -19,7 +19,7 @@ class CameraPoseVisualizer:
         self.yrange = [1e10, -1e10]
         self.zrange = [1e10, -1e10]
     
-    def add_camera(self, extrinsic, focal_len_scaled=5, aspect_ratio=0.3, facecolors="blue", edgecolors='red'):
+    def add_camera(self, extrinsic, focal_len_scaled=3, aspect_ratio=0.3, facecolors="blue", edgecolors='red'):
         vertex_std = np.array([
             [0, 0, 0, 1],
             [focal_len_scaled * aspect_ratio, -focal_len_scaled * aspect_ratio, focal_len_scaled, 1],

@@ -9,6 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 from extensions import IMAGE_EXTENSIONS
 from jsonenc import ExtendedEncoder
+from files import FileName
 
 
 if __name__ == "__main__":
@@ -34,6 +35,7 @@ if __name__ == "__main__":
     if not os.path.exists(save_dir):
         os.makedirs(save_dir, exist_ok=True)
 
+    world_coordinates_data = {}
     for i in range(len(image_list)):
         for j in range(len(image_list)):
             if i <= j:
@@ -63,6 +65,8 @@ if __name__ == "__main__":
             world_coordinates = point4D[:3] / point4D[3]
             world_coordinates = world_coordinates.T
 
+            world_coordinates_data[f"{i}_{j}"] = world_coordinates.tolist()
+
             save_path = os.path.join(save_dir, f"chessboard_3d_{i}_{j}.png")
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
@@ -73,3 +77,7 @@ if __name__ == "__main__":
             ax.scatter(objp[:, 0], objp[:, 1], objp[:, 2])
             plt.savefig(save_path)
             plt.close()
+    
+    with open(FileName.world_coordinates_data, "w") as f:
+        json.dump(world_coordinates_data, f, cls=ExtendedEncoder, indent=4)
+    print(f"Saved to {FileName.world_coordinates_data}")
