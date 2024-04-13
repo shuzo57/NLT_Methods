@@ -5,11 +5,13 @@ from typing import Tuple, Dict, Union
 
 from extensions import IMAGE_EXTENSIONS
 from jsonenc import ExtendedEncoder
+from files import FileName
 
 def intrinsics_calibration(
     image_dir: str,
     pattern_size: Tuple[int, int] = (10, 7),
     result_dir: str = None,
+    save_coords: bool = False,
     ) -> Dict[str, Union[float, int]]:
     
     if result_dir is not None and not os.path.exists(result_dir):
@@ -72,6 +74,18 @@ def intrinsics_calibration(
         new_camera_matrix = new_camera_matrix,
         roi = roi,
     )
+
+    if save_coords:
+        coordinates_data = dict(
+            objpoints = objpoints,
+            imgpoints = imgpoints,
+            pattern_size = pattern_size,
+        )
+        save_path = os.path.join(result_dir, FileName.coordinates_data)
+        with open(save_path, 'w') as f:
+            json.dump(coordinates_data, f, indent=4, cls=ExtendedEncoder)
+        print('Calibration data saved to', save_path)
+    
     return calibration_data
 
 
@@ -80,7 +94,7 @@ if __name__ == '__main__':
     import json
 
     image_dir = "img"
-    calibration_data = intrinsics_calibration(image_dir, result_dir='data/calib_result')
+    calibration_data = intrinsics_calibration(image_dir, result_dir='data/calib_result', save_coords=True)
     save_path = os.path.join(os.getcwd(), FileName.calibration_data)
 
     with open(save_path, 'w') as f:
