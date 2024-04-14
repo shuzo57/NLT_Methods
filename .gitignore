@@ -163,3 +163,5 @@ cython_debug/
 data/camera_pose/*
 data/chessboard_3d/*
 data/calib_result/*
+data/reprojection_error/*
+data/chessboard_3d_relative/*
