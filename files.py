@@ -5,3 +5,4 @@ class FileName:
     world_coordinates_relative_data = "world_coordinates_relative_data.json"
     solve_pnp_data = "solve_pnp_data.json"
     fundamental_matrix_data = "fundamental_matrix_data.json"
+    optimized_data = "optimized_data.json"
