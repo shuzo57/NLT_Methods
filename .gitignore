@@ -165,3 +165,5 @@ data/chessboard_3d/*
 data/calib_result/*
 data/reprojection_error/*
 data/chessboard_3d_relative/*
+data/optimized_chessboard_3d/*
+data/camera_pose_optimized/*
