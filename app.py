@@ -60,5 +60,5 @@ class ImageApp:
 
 # Usage:
 if __name__ == '__main__':
-    app = ImageApp(img_dir='img', resize_height=800, save_dir='.')
+    app = ImageApp(img_dir='img_bundle/left', resize_height=800, save_dir='.')
     app.run()
